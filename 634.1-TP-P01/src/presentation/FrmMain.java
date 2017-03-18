@@ -26,7 +26,7 @@ public class FrmMain extends java.awt.Frame {
   /** Constructeur */
   public FrmMain () {
     initComponents();
-    chargerEmployes ();
+    chargerEmployes();
     btnSupprimer.setEnabled(false);
   } // Constructeur
   
