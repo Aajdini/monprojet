@@ -1,12 +1,9 @@
 package presentation;
 
-import base.DepartementDao;
 import base.EmployeDao;
-import base.FonctionDao;
 import domaine.Employe;
-import domaine.Fonction;
 import java.awt.Frame;
-import java.util.ArrayList;
+import metier.ListeEmployes;
 
 /**
  * 634.1 Programmation - TP P01
@@ -20,22 +17,22 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class FrmMain extends java.awt.Frame {
-    private ArrayList listeEmployes; /* Liste des employés dans l'ordre des noms et prénoms: modèle */
+    private ListeEmployes listeEmployes; /* Liste des employés dans l'ordre des noms et prénoms: modèle */
     private Employe employe; /* employé en cours de traitement */
     
   /** Constructeur */
   public FrmMain () {
     initComponents();
-    chargerEmployes ();
+    chargerEmployes();
     btnSupprimer.setEnabled(false);
   } // Constructeur
   
   /* Charger listeEmployes (modèle) et lstEmployes (vue) avec la liste des Employes */
     public void chargerEmployes () {
         lstEmployes.removeAll();
-        listeEmployes = EmployeDao.getEmployes();
+        listeEmployes = new ListeEmployes();
         for (int k = 0; k < listeEmployes.size(); k++) {
-            Employe e = (Employe)listeEmployes.get(k);
+            Employe e = (Employe)listeEmployes.getEmploye(k);
             lstEmployes.add(e.getNomEmpl() + " " + e.getPrenomEmpl());
         }
     } // chargerEmployes
@@ -206,7 +203,7 @@ public class FrmMain extends java.awt.Frame {
     }//GEN-LAST:event_btnNouveauActionPerformed
 
     private void lstEmployesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lstEmployesItemStateChanged
-        employe = (Employe)listeEmployes.get(lstEmployes.getSelectedIndex());
+        employe = (Employe)listeEmployes.getEmploye(lstEmployes.getSelectedIndex());
         tfNom.setText(employe.getNomEmpl().toString());
         tfPrenom.setText(employe.getPrenomEmpl().toString());
         tfDateEngagement.setText(employe.getDateEmpl().toString());
